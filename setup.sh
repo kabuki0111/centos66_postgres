@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "### パッケージのインストール開始 ###"
-yum -y install httpd php postgresql postgresql-server php-mbstring php-pgsql
+yum -y install httpd php postgresql postgresql-server php-mbstring php-pgsql php-gd
 
 
 echo "### httpdを起動 ###"
@@ -36,9 +36,9 @@ sudo -u postgres createdb testdb
 echo "### ドキュメント・ルートにテスト用コード作成 ###"
 echo "<?php"                                                                    >       /var/www/html/check_db.php
 echo "if (!pg_connect(\"dbname=testdb user=postgres password=test1192\")) {"    >>      /var/www/html/check_db.php
-echo "print(\"connect error\n\");"                                              >>      /var/www/html/check_db.php
+echo "print(\"CONNECT ERROR!!\n\");"                                            >>      /var/www/html/check_db.php
 echo "} else {"                                                                 >>      /var/www/html/check_db.php
-echo "print(\"connect ok\n\");"                                                 >>      /var/www/html/check_db.php
+echo "print(\"CONNECT OK\n\");"                                                 >>      /var/www/html/check_db.php
 echo "}"                                                                        >>      /var/www/html/check_db.php
 echo "?>"                                                                       >>      /var/www/html/check_db.php
 
