@@ -6,19 +6,19 @@ yum -y install httpd php postgresql postgresql-server php-mbstring php-pgsql php
 echo "### C++に必要なパッケージをインストール開始 ###"
 yum -y install wget gcc gcc-c++ devtoolset-2-gcc devtoolset-2-binutils devtoolset-2-gcc-c++ devtoolset-2-gcc-gfortran
 
-#echo "### Pythonに必要なパッケージをインストール開始 ###"
-#yum -y install zlib-devel openssl-devel readline-devel ncurses-devel sqlite-devel expat-devel bzip2-devel tcl-devel tk-devel gdbm-devel libbsd-devel
+echo "### Pythonに必要なパッケージをインストール開始 ###"
+yum -y install zlib-devel openssl-devel readline-devel ncurses-devel sqlite-devel expat-devel bzip2-devel tcl-devel tk-devel gdbm-devel libbsd-devel
 
-#echo "### Python3.3.3をダウンロード ###"
-#wget http://www.python.org/ftp/python/3.3.3/Python-3.3.3.tgz
-#mv -f Python-3.3.3.tgz /usr/local/src/
-#tar zxvf /usr/local/src/Python-3.3.3.tgz
-#mv -f Python-3.3.3 /usr/local/src/
-#/usr/local/src/Python-3.3.3/configure --prefix=/usr/local/python-3.3
-#make
-#make install
-#export PATH=/usr/local/python-3.3/bin:$PATH
-#ln -s /usr/local/python-3.3/bin/python3.3 /usr/local/bin/python-test
+echo "### Python3.3.3をダウンロード ###"
+wget http://www.python.org/ftp/python/3.3.3/Python-3.3.3.tgz
+mv -f Python-3.3.3.tgz /usr/local/src/
+tar zxvf /usr/local/src/Python-3.3.3.tgz
+mv -f Python-3.3.3 /usr/local/src/
+/usr/local/src/Python-3.3.3/configure --prefix=/usr/local/python-3.3
+make /usr/local/src/Python-3.3.3
+make install /usr/local/src/Python-3.3.3
+export PATH=/usr/local/python-3.3/bin:$PATH
+ln -s /usr/local/python-3.3/bin/python3.3 /usr/local/bin/python-test
 
 echo "### GCC4.8をインストール ###"
 cd  /etc/yum.repos.d/
@@ -58,8 +58,8 @@ echo "print(\"CONNECT OK\n\");"                                                 
 echo "}"                                                                        >>      /var/www/html/check_db.php
 echo "?>"                                                                       >>      /var/www/html/check_db.php
 
-#echo "### Pythonにテスト用コード作成 ###"
-#echo "print(\"Hello World\")"		> /var/www/html/check.py
+echo "### Pythonにテスト用コード作成 ###"
+echo "print(\"Hello World\")"		> /var/www/html/check.py
 
 echo "### C++にテスト用コード作成 ###"
 echo "#include <iostream>"                      >       /var/www/html/check.cc
@@ -77,8 +77,8 @@ echo ### パッケージを更新終了 ###
 echo "### 接続テスト結果 ###"
 php /var/www/html/check_db.php
 
-#echo "### Python3.3の動作検証 ###"
-#python3.3 /var/www/html/check.py
+echo "### Python3.3の動作検証 ###"
+python3.3 /var/www/html/check.py
 
 echo "### C++の動作検証ファイルをコンパイル ###"
 cd /var/www/html
