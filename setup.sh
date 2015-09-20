@@ -81,8 +81,8 @@ php /var/www/html/check_db.php
 #python3.3 /var/www/html/check.py
 
 echo "### C++の動作検証ファイルをコンパイル ###"
-cd/var/www/html
+cd /var/www/html
 g++ check.cc -o check_c++
 echo "### C++の動作検証ファイルを実行 ###"
-cd/var/www/html
-./check_c++
+cd /var/www/html
+/var/www/html/check_c++
