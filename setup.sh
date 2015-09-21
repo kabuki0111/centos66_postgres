@@ -6,19 +6,8 @@ yum -y install httpd php postgresql postgresql-server php-mbstring php-pgsql php
 echo "### C++に必要なパッケージをインストール開始 ###"
 yum -y install wget gcc gcc-c++ devtoolset-2-gcc devtoolset-2-binutils devtoolset-2-gcc-c++ devtoolset-2-gcc-gfortran
 
-#echo "### Pythonに必要なパッケージをインストール開始 ###"
-#yum -y install zlib-devel openssl-devel readline-devel ncurses-devel sqlite-devel expat-devel bzip2-devel tcl-devel tk-devel gdbm-devel libbsd-devel
-
-#echo "### Python3.3.3をダウンロード ###"
-#wget http://www.python.org/ftp/python/3.3.3/Python-3.3.3.tgz
-#mv -f Python-3.3.3.tgz /usr/local/src/
-#tar zxvf /usr/local/src/Python-3.3.3.tgz
-#mv -f Python-3.3.3 /usr/local/src/
-#/usr/local/src/Python-3.3.3/configure --prefix=/usr/local/python-3.3
-#make
-#make install
-#export PATH=/usr/local/python-3.3/bin:$PATH
-#ln -s /usr/local/python-3.3/bin/python3.3 /usr/local/bin/python-test
+echo "### Pythonに必要なパッケージをインストール開始 ###"
+yum -y install zlib-devel openssl-devel readline-devel ncurses-devel sqlite-devel expat-devel bzip2-devel tcl-devel tk-devel gdbm-devel libbsd-devel
 
 echo "### GCC4.8をインストール ###"
 cd  /etc/yum.repos.d/
@@ -70,9 +59,9 @@ echo "cout << \"Hello World! C++\" << endl;"    >>      /var/www/html/check.cc
 echo "return 0;"                                >>      /var/www/html/check.cc
 echo "}"                                        >>      /var/www/html/check.cc
 
-echo ### パッケージを更新開始 ###
+echo "### パッケージを更新開始 ###"
 yum -y update
-echo ### パッケージを更新終了 ###
+echo "### パッケージを更新終了 ###"
 
 echo "### 接続テスト結果 ###"
 php /var/www/html/check_db.php
@@ -86,3 +75,20 @@ g++ check.cc -o check_c++
 echo "### C++の動作検証ファイルを実行 ###"
 cd /var/www/html
 /var/www/html/check_c++
+
+echo "python3.3をセットアップ"
+cd /usr/local/src
+pwd
+wget http://www.python.org/ftp/python/3.3.3/Python-3.3.3.tgz
+tar zxvf Python-3.3.3.tgz
+
+cd Python-3.3.3
+pwd
+./configure --prefix=/usr/local/python-3.3
+make
+make install
+
+export PATH=/usr/local/python-3.3/bin:$PATH
+ln -s /usr/local/python-3.3/bin/python3.3 /usr/local/bin/python-test
+
+python3.3 -V
